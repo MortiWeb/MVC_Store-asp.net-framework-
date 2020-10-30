@@ -1,0 +1,23 @@
+﻿@helper StatusMessage(System.Web.Mvc.TempDataDictionary tempData)
+{
+    if (tempData["SM"] != null)
+    {
+        <div class="alert alert-success">
+            @tempData["SM"];
+        </div>
+    }
+    if (tempData["EM"] != null)
+    {
+        <div class="alert alert-warning">
+            @tempData["EM"];
+        </div>
+    }
+    <script>
+        /*Fadeout status message*/
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(function () {
+                $("div.alert").fadeOut("fast");
+            }, 5000);
+        }, false);
+    </script>
+}

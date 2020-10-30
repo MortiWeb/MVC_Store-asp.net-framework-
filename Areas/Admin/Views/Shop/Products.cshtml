@@ -1,0 +1,80 @@
+﻿@model IEnumerable<MVC_Store.Models.ViewModels.Shop.ProductVM>
+
+@{
+    ViewBag.Title = "Products";
+}
+@using PagedList.Mvc
+@using PagedList
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
+
+<h2>Products</h2>
+<select id="selectCat" name="selectCat" class="custom-select border-dark">
+    <option value="0">All</option>
+    @foreach (var cat in ViewBag.Categories)
+    {
+        if (cat.Value == ViewBag.SelectedCat)
+        {
+            <option value="@cat.Value" selected="selected">@cat.Text</option>
+        }
+        else
+        {
+            <option value="@cat.Value">@cat.Text</option>
+        }
+
+    }
+</select>
+<br />
+<br />
+<p>
+    @Html.ActionLink("Add new product", "AddProduct", "Shop", new { @class = "btn btn-success" })
+</p>
+
+@htmlHelpers.StatusMessage(TempData)
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageName)
+        </th>
+        <th></th>
+    </tr>
+    @foreach (var item in ViewBag.OnePageOfProducts)
+    {
+        <tr>
+            <td>
+                @item.Name
+            </td>
+            <td>
+                @item.Price
+            </td>
+            <td>
+                @if (string.IsNullOrEmpty(item.ImageName))
+                {
+                    <img class="previewProdctImg" src="~/Content/img/NO_IMG_600x600.png" />
+                }
+                else
+                {
+                    <img class="previewProdctImg" src="~/Images/Uploads/Products/@item.Id/Gallery/Thumbs/@item.ImageName" />
+                }
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditProduct", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Delete", "DeleteProduct", new { id = item.Id }, new { @class = "delete btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Products", new { page, catId = ViewBag.SelectedCat }))
+
+@section scripts
+    {
+    <script src="~/Scripts/viewjs/Products.js"></script>
+}

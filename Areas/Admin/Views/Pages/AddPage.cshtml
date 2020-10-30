@@ -1,0 +1,69 @@
+﻿@model MVC_Store.Models.ViewModels.Pages.PageVM
+
+@{
+    ViewBag.Title = "Add Page";
+}
+
+<h2>Add New Page</h2>
+
+@htmlHelpers.StatusMessage(TempData)
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", htmlAttributes: new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.Slug)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Body, "Text", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Body, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Body, "", htmlAttributes: new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Article, "User friendly URL", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Article, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Article, "", htmlAttributes: new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <div class="custom-control custom-checkbox">
+                    @Html.EditorFor(model => model.HasSidebar, new { htmlAttributes = new { @class = "custom-control-input" } })
+                    @Html.LabelFor(model => model.HasSidebar, "Check, if it has sidebar", htmlAttributes: new { @class = "custom-control-label" })
+                    @Html.ValidationMessageFor(model => model.HasSidebar, "", htmlAttributes: new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col">
+                <input type="submit" value="Add Page" class="btn btn-primary btn-block" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to page list", "Index")
+</div>
+@section Scripts {
+    <script>
+        CKEDITOR.replace("Body");
+    </script>
+}

@@ -1,0 +1,74 @@
+﻿@model IEnumerable<MVC_Store.Models.ViewModels.Shop.CategoryVM>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<h2>Categories</h2>
+
+<div class="new-cat">
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Category Name</span>
+        </div>
+        <input type="text" id="newcatname" class="form-control" />
+    </div>
+    <p>
+        <a href="#" id="newcata" class="btn btn-primary">Add new category</a>
+        <span class="ajax-text">
+            <img src="~/Content/img/ajax-loader.gif" height="60" />
+        </span>
+    </p>
+</div>
+
+@htmlHelpers.StatusMessage(TempData)
+
+@if (!Model.Any())
+{
+    <h2 class="text-center alert alert-warning">There are no category!</h2>
+}
+else
+{
+    <table id="categories" class="table sorting">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Name)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr id="id_@item.Id">
+                    <td>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-0 m-auto">
+                                    <div class="ui-icon ui-icon-arrowthick-2-n-s"></div>
+                                </div>
+                                <div class="col">
+                                    @Html.EditorFor(modelItem => item.Name, new { htmlAttributes = new { @class = "form-control d-inline-block", @readonly = "readonly" } })
+                                    <div class="ajax-icon-save btn p-0">
+                                        <img src="~/Content/img/save-as-32.png" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="ajaxdivtd"></div>
+                    </td>
+                    <td>
+                        <button class="edit btn btn-primary">Edit</button>
+                        @Html.ActionLink("Delete", "DeleteCategory", new { id = item.Id }, new { @class = "delete btn btn-danger" })
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@section Scripts{
+    <script src="~/Scripts/viewjs/category.js"></script>
+}

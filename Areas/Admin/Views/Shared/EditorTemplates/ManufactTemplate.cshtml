@@ -1,0 +1,14 @@
+﻿<select id="ManufacturerId" name="ManufacturerId" class="form-control w-100">
+    <option disabled>-Select Country-</option>
+    @foreach (var item in ViewBag.Countries)
+    {
+        if (item.Id != Model)
+        {
+            <option value="@item.Id">@item.Name</option>
+        }
+        else
+        {
+            <option value="@item.Id" selected>@item.Name</option>
+        }
+    }
+</select>
