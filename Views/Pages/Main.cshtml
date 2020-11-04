@@ -1,0 +1,50 @@
+﻿@model IEnumerable<MVC_Store.Models.ViewModels.Shop.ProductVM>
+
+@{
+    ViewBag.Title = "Main store page";
+}
+<br><br>
+<h2>Main store page</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ImageName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @if (string.IsNullOrEmpty(item.ImageName))
+                {
+                    <img class="previewProdctImg" src="~/Content/img/NO_IMG_600x600.png" />
+                }
+                else
+                {
+                    <img class="previewProdctImg" src="~/Images/Uploads/Products/@item.Id/Gallery/Thumbs/@item.ImageName" />
+                }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.ActionLink("DetailsProduct", "DetailsProduct", new { id = item.Id }, new { @class="btn btn-primary" })
+                @Html.ActionLink("AddToCart", "AddToCart", new { id = item.Id }, new { @class = "btn btn-success" })
+            </td>
+        </tr>
+    }
+
+</table>
