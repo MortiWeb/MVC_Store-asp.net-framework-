@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
@@ -11,42 +11,53 @@
 <body>
     <div class="fixed-top bg-dark">
         <div class="container">
-            <nav class="navbar navbar-expand-lg navbar-dark w-100">
+            <nav class="navbar navbar-expand-lg navbar-dark w-100 p-0">
 
-                <a class="navbar-brand" href="#">Navbar w/ text</a>
+                @Html.ActionLink("MVC5 Store", "Main", "Pages", "", new { @class = "navbar-brand" })
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Features</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Pricing</a>
+                        @Html.Action("ServiceMenuPartial", "Pages")
+                    </ul>
+                    <ul class="navbar-nav ml-auto">
+                        <li>
+                            <a class="nav-link" href="#">Shopping Cart</a>
                         </li>
                     </ul>
-                    <span class="navbar-text">
-                        Navbar text with an inline element
-                    </span>
                 </div>
             </nav>
         </div>
     </div>
     <div class="container body-content">
-        @RenderBody()
+        <div class="row">
+            @if (ViewBag.Sidebar == "OK")
+            {
+                <div class="col">
+                    @RenderBody()
+                </div>
+                <div class="col-12 col-md-3">
+                    @Html.Action("SideBarPartial", "Pages")
+                </div>
+            }
+            else
+            {
+                <div class="col">
+                    @RenderBody()
+                </div>
+            }
+        </div>
         <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
-        </footer>
+        <div class="row">
+            <footer>
+                <p>&copy; @DateTime.Now.Year - My MVC ASP.NET STORE</p>
+            </footer>
+        </div>
     </div>
-    
 
-        @Scripts.Render("~/bundles/jquery")
-        @Scripts.Render("~/bundles/bootstrap")
-        @RenderSection("scripts", required: false)
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
 </body>
 </html>

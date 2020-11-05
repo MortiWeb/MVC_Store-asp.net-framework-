@@ -974,6 +974,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
     <Content Include="Views\Pages\Main.cshtml" />
     <Content Include="Views\Pages\ServicePage.cshtml" />
+    <Content Include="Views\Pages\_ServiceMenuPartial.cshtml" />
+    <Content Include="Views\Pages\_SideBarPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />

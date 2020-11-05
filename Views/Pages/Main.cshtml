@@ -41,7 +41,7 @@
                 @Html.DisplayFor(modelItem => item.Price)
             </td>
             <td>
-                @Html.ActionLink("DetailsProduct", "DetailsProduct", new { id = item.Id }, new { @class="btn btn-primary" })
+                @Html.ActionLink("Details", "DetailsProduct",  new { id = item.Id }, new { @class = "btn btn-primary" })
                 @Html.ActionLink("AddToCart", "AddToCart", new { id = item.Id }, new { @class = "btn btn-success" })
             </td>
         </tr>

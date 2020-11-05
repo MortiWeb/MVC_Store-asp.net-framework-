@@ -21,7 +21,7 @@ namespace MVC_Store.Controllers
             }
             return View(products);
         }
-        // GET: 
+        // GET: Pages/ServicePage/{slug}
         public ActionResult ServicePage(string slug)
         {
             if(string.IsNullOrEmpty(slug))
@@ -31,7 +31,7 @@ namespace MVC_Store.Controllers
             PageVM page;
             using (Db db = new Db())
             {
-                page = db.Pages.Where(p => p.Slug == slug).Select(p => new PageVM(p)).FirstOrDefault();
+                page = new PageVM(db.Pages.Where(p => p.Slug == slug).FirstOrDefault());
                 if (page == null)
                 {
                     return RedirectToAction("Main");
@@ -46,6 +46,36 @@ namespace MVC_Store.Controllers
                 }
             }
             return View(page);
+        }
+        public ActionResult ServiceMenuPartial()
+        {
+            List<PageVM> listPagesForMenu;
+            using (Db db = new Db())
+            {
+                listPagesForMenu = db.Pages.ToArray().OrderBy(p => p.Sorting).Where(p => true).Select(p => new PageVM(p)).ToList();
+            }
+            return PartialView("_ServiceMenuPartial", listPagesForMenu);
+        }
+        public ActionResult SideBarPartial()
+        {
+            SidebarVM sidebar; 
+            using (Db db = new Db())
+            {
+                sidebar = new SidebarVM(db.Sidebars.First());
+            }
+            return PartialView("_SideBarPartial", sidebar);
+        }
+
+        public ActionResult DetailsProduct(int id)
+        {
+
+            return View();
+        }
+
+        public ActionResult AddToCart(int id)
+        {
+
+            return View();
         }
     }
 }
