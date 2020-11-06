@@ -13,7 +13,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-dark w-100 p-0">
 
-                @Html.ActionLink("MVC5 Store", "Main", "Pages", "", new { @class = "navbar-brand" })
+                @Html.ActionLink("MVC5 Store", "Main", "Shop", "", new { @class = "navbar-brand" })
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -31,18 +31,25 @@
         </div>
     </div>
     <div class="container body-content">
-        <div class="row">
+        <div class="row pt-4">
+
             @if (ViewBag.Sidebar == "OK")
             {
+                <div class="col-12 col-sm-12 col-md-3">
+                    @Html.Action("CategoryPartial", "Shop")
+                </div>
                 <div class="col">
                     @RenderBody()
                 </div>
-                <div class="col-12 col-md-3">
+                <div class="col-12 col-sm-12 col-md-3">
                     @Html.Action("SideBarPartial", "Pages")
                 </div>
             }
             else
             {
+                <div class="col-12 col-sm-12 col-md-3">
+                    @Html.Action("CategoryPartial", "Shop")
+                </div>
                 <div class="col">
                     @RenderBody()
                 </div>

@@ -14,6 +14,7 @@ namespace MVC_Store.Models.Data
         {
             Products = new List<ProductDTO>();
         }
+
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }

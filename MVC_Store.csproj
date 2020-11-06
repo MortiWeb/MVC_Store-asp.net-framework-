@@ -137,11 +137,11 @@
     <Compile Include="Areas\Admin\Controllers\PagesController.cs" />
     <Compile Include="Areas\Admin\Controllers\ShopController.cs" />
     <Compile Include="Controllers\PagesController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Data\CategoryDTO.cs" />
-    <Compile Include="Models\Data\CategoryProductDTO.cs" />
     <Compile Include="Models\Data\Db.cs" />
     <Compile Include="Models\Data\PagesDTO.cs" />
     <Compile Include="Models\Data\CountryDTO.cs" />
@@ -972,10 +972,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
-    <Content Include="Views\Pages\Main.cshtml" />
+    <Content Include="Views\Shop\Main.cshtml" />
     <Content Include="Views\Pages\ServicePage.cshtml" />
     <Content Include="Views\Pages\_ServiceMenuPartial.cshtml" />
     <Content Include="Views\Pages\_SideBarPartial.cshtml" />
+    <Content Include="Views\Shop\_CategoryPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />

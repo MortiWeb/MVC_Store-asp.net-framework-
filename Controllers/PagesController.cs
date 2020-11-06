@@ -11,16 +11,6 @@ namespace MVC_Store.Controllers
 {
     public class PagesController : Controller
     {
-        // GET: AllProducts(main page)
-        public ActionResult Main()
-        {
-            List<ProductVM> products;
-            using(Db db = new Db())
-            {
-                products = db.Products.Where(p => true).ToArray().Select(p => new ProductVM(p)).ToList();
-            }
-            return View(products);
-        }
         // GET: Pages/ServicePage/{slug}
         public ActionResult ServicePage(string slug)
         {
@@ -52,7 +42,7 @@ namespace MVC_Store.Controllers
             List<PageVM> listPagesForMenu;
             using (Db db = new Db())
             {
-                listPagesForMenu = db.Pages.ToArray().OrderBy(p => p.Sorting).Where(p => true).Select(p => new PageVM(p)).ToList();
+                listPagesForMenu = db.Pages.Where(p => true).ToArray().OrderBy(p => p.Sorting).Select(p => new PageVM(p)).ToList();
             }
             return PartialView("_ServiceMenuPartial", listPagesForMenu);
         }
@@ -64,18 +54,6 @@ namespace MVC_Store.Controllers
                 sidebar = new SidebarVM(db.Sidebars.First());
             }
             return PartialView("_SideBarPartial", sidebar);
-        }
-
-        public ActionResult DetailsProduct(int id)
-        {
-
-            return View();
-        }
-
-        public ActionResult AddToCart(int id)
-        {
-
-            return View();
         }
     }
 }

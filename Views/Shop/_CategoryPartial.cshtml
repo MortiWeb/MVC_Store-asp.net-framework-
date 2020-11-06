@@ -1,0 +1,9 @@
+﻿@model IEnumerable<MVC_Store.Models.ViewModels.Shop.CategoryVM>
+
+<div class="list-group">
+    <span class="list-group-item list-group-item-info" aria-disabled="true">Categories</span>
+    @foreach (var item in Model)
+    {
+        @Html.ActionLink(item.Name, "Main", "Shop", new { slug = item.Slug }, new { @class = "list-group-item list-group-item-action" });
+    }
+</div>
