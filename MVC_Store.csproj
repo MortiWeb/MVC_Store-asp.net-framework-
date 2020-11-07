@@ -977,6 +977,7 @@
     <Content Include="Views\Pages\_ServiceMenuPartial.cshtml" />
     <Content Include="Views\Pages\_SideBarPartial.cshtml" />
     <Content Include="Views\Shop\_CategoryPartial.cshtml" />
+    <Content Include="Views\Shop\DetailsProduct.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />

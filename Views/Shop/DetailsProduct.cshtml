@@ -1,0 +1,70 @@
+﻿@model MVC_Store.Models.ViewModels.Shop.ProductVM
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<h2>@Model.Name</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+
+        <dd>
+            @if (!string.IsNullOrEmpty(Model.ImageName))
+            {
+                <img src="~/Images/Uploads/Products/@Model.Id/Gallery/Thumbs/@Model.ImageName" class="img-thumbnail float-left img-admin-gallery m-2" />
+            }
+            else
+            {
+                <img class="img-thumbnail float-left imgpreview m-2" src="~/Content/img/NO_IMG_600x600.png" />
+            }
+            @Html.DisplayFor(model => model.Description)
+            <br><br>
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Manufacturer.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StyleNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.StyleNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+            @Html.ActionLink("AddToCart", "AddToCart", new { id = Model.Id }, new { @class = "btn btn-success" })
+        </dd>
+    </dl>
+    <div class="row">
+        <label class="control-label">Gallery</label>
+    </div>
+    <div class="row">
+        @if (Model.GalleryImages != null)
+        {
+            foreach (var imgName in Model.GalleryImages)
+            {
+                <img src="~/Images/Uploads/Products/@Model.Id/Gallery/Thumbs/@imgName" class="img-thumbnail float-left img-admin-gallery" />
+            }
+        }
+        else
+        {
+            <img class="img-thumbnail float-left imgpreview" src="~/Content/img/NO_IMG_600x600.png" />
+        }
+
+    </div>
+</div>
+

@@ -18,6 +18,7 @@ namespace MVC_Store.Models.ViewModels.Shop
             Slug = row.Slug;
             Description = row.Description;
             ManufacturerId = row.ManufacturerId;
+            Manufacturer = row.Manufacturer;
             StyleNumber = row.StyleNumber;
             Price = row.Price;
             ImageName = row.ImageName;
@@ -36,8 +37,8 @@ namespace MVC_Store.Models.ViewModels.Shop
         [StringLength(int.MaxValue, MinimumLength = 3, ErrorMessage = "Description must be at least 3 characters")]
         public string Description { get; set; }
         [Required]
-        [DisplayName("Manufacturer")]
         public int ManufacturerId { get; set; }
+        [DisplayName("Manufacturer")]
         public virtual CountryDTO Manufacturer { get; set; }
         [Required]
         [StringLength(30, MinimumLength = 3, ErrorMessage = "StyleNumber must be at least 3 and no more than 30 characters")]

@@ -16,16 +16,16 @@ namespace MVC_Store.Controllers
         {
             if(string.IsNullOrEmpty(slug))
             {
-                return RedirectToAction("Main");
+                return RedirectToAction("Main", "Shop");
             }
             PageVM page;
             using (Db db = new Db())
             {
-                page = new PageVM(db.Pages.Where(p => p.Slug == slug).FirstOrDefault());
-                if (page == null)
-                {
-                    return RedirectToAction("Main");
-                }
+                var prd = db.Pages.Where(p => p.Slug == slug).FirstOrDefault();
+                if (prd == null) return new HttpNotFoundResult();
+
+                page = new PageVM(prd);
+                
                 if(page.HasSidebar == true)
                 {
                     ViewBag.SideBar = "OK";
@@ -51,7 +51,10 @@ namespace MVC_Store.Controllers
             SidebarVM sidebar; 
             using (Db db = new Db())
             {
-                sidebar = new SidebarVM(db.Sidebars.First());
+                var sb = db.Sidebars.First();
+                if (sb == null) return new HttpNotFoundResult();
+
+                sidebar = new SidebarVM(sb);
             }
             return PartialView("_SideBarPartial", sidebar);
         }

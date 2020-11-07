@@ -2,6 +2,7 @@
 using MVC_Store.Models.ViewModels.Shop;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,7 +11,7 @@ namespace MVC_Store.Controllers
 {
     public class ShopController : Controller
     {
-        // GET: AllProducts(main page)
+        // GET: Shop/Main/{slug} (main page)
         public ActionResult Main(string slug)
         {
             List<ProductVM> products;
@@ -29,13 +30,6 @@ namespace MVC_Store.Controllers
             return View(products);
         }
 
-        // GET: shop/
-        public ActionResult ProductCats()
-        {
-
-            return View();
-        }
-
         public ActionResult CategoryPartial(string slug)
         {
             List<CategoryVM> cat;
@@ -46,5 +40,27 @@ namespace MVC_Store.Controllers
             return PartialView("_CategoryPartial", cat);
         }
 
+        // GET: Shop/DetailsProduct/{id}
+        public ActionResult DetailsProduct(string slug)
+        {
+            ProductVM product;
+            using (Db db = new Db())
+            {
+                var prd = db.Products.Where(p => p.Slug == slug).FirstOrDefault();
+                if(prd == null) 
+                    return new HttpNotFoundResult();
+                
+                product = new ProductVM(prd);
+
+                var puthImg = Path.Combine($"{Server.MapPath(@"\")}Images\\Uploads\\Products", product.Id.ToString(), "Gallery\\Thumbs");
+                if (Directory.Exists(puthImg))
+                {
+                    product.GalleryImages = Directory.EnumerateFiles(puthImg).Select(fn => Path.GetFileName(fn)).ToList();
+                    if (product.GalleryImages.Count() == 0)
+                        product.GalleryImages = null;
+                }
+            }
+            return View(product);
+        }
     }
 }

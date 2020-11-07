@@ -29,11 +29,5 @@ namespace MVC_Store.Models.Data
                     t.ToTable("tblCategoryProduct");
                 });
         }
-
-       // public System.Data.Entity.DbSet<MVC_Store.Models.ViewModels.Pages.PageVM> PageVMs { get; set; }
-
-       // public System.Data.Entity.DbSet<MVC_Store.Models.ViewModels.Pages.SidebarVM> SidebarVMs { get; set; }
-
-       //public System.Data.Entity.DbSet<MVC_Store.Models.ViewModels.Shop.CategoryVM> CategoryVMs { get; set; }
     }
 }
