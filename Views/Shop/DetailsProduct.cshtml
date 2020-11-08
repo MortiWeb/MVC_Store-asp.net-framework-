@@ -52,19 +52,37 @@
     <div class="row">
         <label class="control-label">Gallery</label>
     </div>
-    <div class="row">
-        @if (Model.GalleryImages != null)
-        {
-            foreach (var imgName in Model.GalleryImages)
+    <div class="fancyboxdiv">
+        <div class="row">
+            @if (Model.GalleryImages != null)
             {
-                <img src="~/Images/Uploads/Products/@Model.Id/Gallery/Thumbs/@imgName" class="img-thumbnail float-left img-admin-gallery" />
+                <div class="col">
+                    @foreach (var imgName in Model.GalleryImages)
+                    {
+                    <a class="fancybox" rel="gallery1" href="~/Images/Uploads/Products/@Model.Id/Gallery/@imgName">
+                        <img src="~/Images/Uploads/Products/@Model.Id/Gallery/Thumbs/@imgName" class="img-thumbnail float-left img-admin-gallery" />
+                    </a>
+                    }
+                </div>
             }
-        }
-        else
-        {
-            <img class="img-thumbnail float-left imgpreview" src="~/Content/img/NO_IMG_600x600.png" />
-        }
+            else
+            {
+                <img class="img-thumbnail float-left imgpreview" src="~/Content/img/NO_IMG_600x600.png" />
+            }
 
+        </div>
     </div>
+    
 </div>
 
+
+@section scripts{
+    <link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery.fancybox.js"></script>
+
+    <script>
+        $(function () {
+            $(".fancybox").fancybox();
+        });
+    </script>
+}

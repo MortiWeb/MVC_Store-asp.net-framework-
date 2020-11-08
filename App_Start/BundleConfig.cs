@@ -47,6 +47,7 @@ namespace MVC_Store
 
             bundles.Add(new StyleBundle("~/Content/imageUploader").Include(
                       "~/Content/imageUploader/image-uploader.css"));
+            
         }
     }
 }
