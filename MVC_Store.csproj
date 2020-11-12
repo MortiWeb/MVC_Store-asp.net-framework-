@@ -148,6 +148,7 @@
     <Compile Include="Models\Data\CountryDTO.cs" />
     <Compile Include="Models\Data\ProductDTO.cs" />
     <Compile Include="Models\Data\SidebarDTO.cs" />
+    <Compile Include="Models\ViewModels\Cart\CartVM.cs" />
     <Compile Include="Models\ViewModels\Pages\PageVM.cs" />
     <Compile Include="Models\ViewModels\Pages\SidebarVM.cs" />
     <Compile Include="Models\ViewModels\Shop\CategoryVM.cs" />
@@ -964,6 +965,8 @@
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
     <Content Include="Scripts\viewjs\addProduct.js" />
+    <Content Include="Scripts\viewjs\cart.js" />
+    <Content Include="Scripts\viewjs\cartPage.js" />
     <Content Include="Scripts\viewjs\category.js" />
     <Content Include="Scripts\viewjs\uppyUploaderConf.js" />
     <Content Include="Scripts\viewjs\pages.js" />
@@ -995,6 +998,8 @@
     <Content Include="Views\Pages\_SideBarPartial.cshtml" />
     <Content Include="Views\Shop\_CategoryPartial.cshtml" />
     <Content Include="Views\Shop\DetailsProduct.cshtml" />
+    <Content Include="Views\Cart\_CartPartial.cshtml" />
+    <Content Include="Views\Cart\CartPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
@@ -1004,7 +1009,6 @@
     <Folder Include="fileman\tmp\" />
     <Folder Include="fileman\Uploads\Documents\" />
     <Folder Include="fileman\Uploads\FLV\" />
-    <Folder Include="Views\Cart\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

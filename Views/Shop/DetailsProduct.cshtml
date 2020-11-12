@@ -46,7 +46,8 @@
 
         <dd>
             @Html.DisplayFor(model => model.Price)
-            @Html.ActionLink("AddToCart", "AddToCart", new { id = Model.Id }, new { @class = "btn btn-success" })
+            <a href="#" id="@Model.Id" class="btn btn-success addtocart">Add To Cart</a>
+            <div class="ajaxmsg">Added to Cart!</div>
         </dd>
     </dl>
     <div class="row">
@@ -59,9 +60,9 @@
                 <div class="col">
                     @foreach (var imgName in Model.GalleryImages)
                     {
-                    <a class="fancybox" rel="gallery1" href="~/Images/Uploads/Products/@Model.Id/Gallery/@imgName">
-                        <img src="~/Images/Uploads/Products/@Model.Id/Gallery/Thumbs/@imgName" class="img-thumbnail float-left img-admin-gallery" />
-                    </a>
+                        <a class="fancybox" rel="gallery1" href="~/Images/Uploads/Products/@Model.Id/Gallery/@imgName">
+                            <img src="~/Images/Uploads/Products/@Model.Id/Gallery/Thumbs/@imgName" class="img-thumbnail float-left img-admin-gallery" />
+                        </a>
                     }
                 </div>
             }
@@ -72,14 +73,14 @@
 
         </div>
     </div>
-    
+
 </div>
 
 
 @section scripts{
     <link href="~/Content/jquery.fancybox.css" rel="stylesheet" />
     <script src="~/Scripts/jquery.fancybox.js"></script>
-
+    <script src="~/Scripts/viewjs/cart.js"></script>
     <script>
         $(function () {
             $(".fancybox").fancybox();

@@ -1,0 +1,6 @@
+﻿@model MVC_Store.Models.ViewModels.Cart.CartVM
+
+<div class="ajaxcart text-light">
+    Cart: <span class="topQty">@Model.Quantity</span> goods | Total: <span class="topTotal">@Model.Price</span>$<br>
+    @Html.ActionLink("Checkout","CartPage", "", new { style = "font-weight: 500;" })
+</div>

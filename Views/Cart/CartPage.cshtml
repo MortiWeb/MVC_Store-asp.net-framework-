@@ -1,0 +1,75 @@
+﻿@model IEnumerable<MVC_Store.Models.ViewModels.Cart.CartVM>
+
+@{
+    ViewBag.Title = "Your Cart";
+}
+
+<h3>Your Cart</h3>
+
+@if (ViewBag.Msg != null)
+{
+    <h5>@ViewBag.Msg</h5>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                Image
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th></th>
+            <th>
+                Total
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @if (string.IsNullOrEmpty(item.Image))
+                    {
+                        <img class="img-preview-cart" src="~/Content/img/NO_IMG_600x600.png" />
+                    }
+                    else
+                    {
+                        <img class="img-preview-cart" height="120" src="~/Images/Uploads/Products/@item.ProductId/Gallery/Thumbs/@item.Image" />
+                    }
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProductName)
+                </td>
+                <td class="qty@(item.ProductId)">
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                    <a href="#" class="incProduct" data-id="@item.ProductId">➕</a>
+                    <a href="#" class="decProduct" data-id="@item.ProductId">➖</a>
+                    <a href="#" class="removeProduct" data-id="@item.ProductId">❌</a>
+                </td>
+                <td class="total@(item.ProductId)">
+                    <span>@Html.DisplayFor(modelItem => item.Total)</span>$
+                </td>
+
+            </tr>
+        }
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><b>Grand total:</b></td>
+            <td class="grandtotal"><span>@ViewBag.Total</span>$</td>
+        </tr>
+    </table>
+}
+
+@section scripts{
+
+    <script src="~/Scripts/viewjs/cartPage.js"></script>
+}

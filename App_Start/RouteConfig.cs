@@ -9,6 +9,7 @@ namespace MVC_Store
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapRoute("Cart", "Cart/{action}/{id}", new { controller = "Cart", action = "CartPage", id = UrlParameter.Optional }, new[] { "MVC_Store.Controllers" });
             routes.MapRoute("Category", "Shop/{action}/{slug}", new { controller = "Shop", action = "Main", slug = UrlParameter.Optional }, new[] { "MVC_Store.Controllers" });
             routes.MapRoute("DetailsProduct", "Shop/DetailsProduct/{slug}", new { controller = "Shop", action = "DetailsProduct", slug = UrlParameter.Optional }, new[] { "MVC_Store.Controllers" });
             routes.MapRoute("SideBarPartial", "Pages/SideBarPartial", new {controller = "Pages", action = "SideBarPartial" }, new[] { "MVC_Store.Controllers" });

@@ -35,7 +35,18 @@ textarea {
     display: none;
 }
 .img-admin-gallery, .imgpreview, .previewProdctImg {
-    height: 200px !important;
+    height: 180px !important;
+}
+.img-preview-cart {
+    height: 100px !important;
+}
+.ajaxmsg {
+    background: #2c962c;
+    color: whitesmoke;
+    display: none;
+}
+.ib {
+    display: inline-block !important;
 }
 
 /*
