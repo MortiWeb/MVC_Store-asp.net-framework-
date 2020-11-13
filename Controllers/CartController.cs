@@ -70,7 +70,7 @@ namespace MVC_Store.Controllers
 
             return PartialView("_CartPartial", model);
         }
-        // GET: Cart/IncrementProduct
+        // GET: Cart/IncrementProduct/id
         public JsonResult IncrementProduct(int id)
         {
             int totalQty = 0;
@@ -95,32 +95,55 @@ namespace MVC_Store.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        // GET: Cart/IncrementProduct
+        // GET: Cart/IncrementProduct/id
         public JsonResult DecrementProduct(int id)
         {
             int totalQty = 0;
-            decimal _price = 0m;
             decimal _grandtotal = 0m;
-            int _qty = 0;
+            CartVM model = null;
+
             var cartList = Session["cart"] as List<CartVM>;
+
             foreach (var item in cartList)
             {
                 if (item.ProductId == id)
                 {
-                    _price = item.Price;
-                    if(item.Quantity > 1)
+                    item.Quantity--;
+                    if (item.Quantity > 0)
                     {
-                        item.Quantity--;
+                        model = new CartVM
+                        {
+                            Price = item.Price,
+                            Quantity = item.Quantity
+                        };
                     }
-                    _qty = item.Quantity;
+                    else
+                    {
+                        model = item;
+                    }
                 }
                 totalQty += item.Quantity;
                 _grandtotal += item.Total;
             }
+            if (model != null)
+                cartList.Remove(model);
+
             Session["cart"] = cartList;
-            var result = new { qty = _qty, price = _price, totalqty = totalQty, grandtotal = _grandtotal };
+            var result = new { qty = model.Quantity, price = model.Price, totalqty = totalQty, grandtotal = _grandtotal };
 
             return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
+        // GET: Cart/RemoveProduct/id
+        public void RemoveProduct(int id)
+        {
+            var cartList = Session["cart"] as List<CartVM>;
+            CartVM model = cartList.FirstOrDefault(c => c.ProductId == id);
+            
+            if(model != null)
+                cartList.Remove(model);
+
+            Session["cart"] = cartList;
         }
     }
 }
