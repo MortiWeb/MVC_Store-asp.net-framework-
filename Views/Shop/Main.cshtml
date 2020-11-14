@@ -1,9 +1,10 @@
 ﻿@model IEnumerable<MVC_Store.Models.ViewModels.Shop.ProductVM>
-
+@using PagedList.Mvc
+@using PagedList
 @{
     ViewBag.Title = ViewBag.Title;
 }
-
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 <h2>@ViewBag.Title</h2>
 
 
@@ -21,7 +22,7 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in ViewBag.OnePageOfProducts)
     {
         <tr>
             <td>
@@ -35,10 +36,10 @@
                 }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @item.Name
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Price)
+                @item.Price
             </td>
             <td>
                 @Html.ActionLink("Details", "DetailsProduct", new { slug = item.Slug }, new { @class = "btn btn-primary" })
@@ -49,6 +50,8 @@
     }
 
 </table>
+
+@Html.PagedListPager((IPagedList)ViewBag.OnePageOfProducts, page => Url.Action("Main", "Shop", new { slug = ViewBag.SelectedCat, page }))
 
 @section scripts{
 

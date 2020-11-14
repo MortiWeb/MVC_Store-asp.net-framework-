@@ -20,6 +20,9 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav mr-auto">
                         @Html.Action("ServiceMenuPartial", "Pages")
+                        <li class="nav-item">
+                            @Html.ActionLink("Admin Panel", "Index", new { area = "Admin", controller = "Pages" }, new { @class = "nav-link font-weight-bold" })
+                        </li>
                     </ul>
                     <ul class="navbar-nav ml-auto">
                         <li>

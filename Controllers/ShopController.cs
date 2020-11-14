@@ -6,31 +6,39 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PagedList;
 
 namespace MVC_Store.Controllers
 {
     public class ShopController : Controller
     {
         // GET: Shop/Main/{slug} (main page)
-        public ActionResult Main(string slug)
+        public ActionResult Main(string slug, int? page)
         {
             List<ProductVM> products;
+            var pageNum = page ?? 1;
+
             using (Db db = new Db())
             {
                 var category = db.Categories.Where(c => c.Slug == slug).FirstOrDefault();
-                if(category == null)
+                if (string.IsNullOrEmpty(slug) || category == null)
                 {
                     ViewBag.Title = "Main store page";
                     products = db.Products.ToArray().Select(p => new ProductVM(p)).ToList();
+                    ViewBag.OnePageOfProducts = products.ToPagedList(pageNum, 3);
+                    ViewBag.SelectedCat = null;
                     return View(products);
                 }
+                
                 ViewBag.Title = category.Name + " Category";
                 products = db.Products.Where(p => p.Categories.Any(c => c.Id == category.Id)).ToArray().Select(p => new ProductVM(p)).ToList();
+                ViewBag.OnePageOfProducts = products.ToPagedList(pageNum, 3);
+                ViewBag.SelectedCat = slug;
             }
             return View(products);
         }
 
-        public ActionResult CategoryPartial(string slug)
+        public ActionResult CategoryPartial()
         {
             List<CategoryVM> cat;
             using (Db db = new Db())
