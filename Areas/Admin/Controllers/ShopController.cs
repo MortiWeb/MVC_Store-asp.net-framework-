@@ -122,7 +122,7 @@ namespace MVC_Store.Areas.Admin.Controllers
             int id;
             string sId;
             var checkFile = file.First();
-            string styleNumber = model.StyleNumber.ToLower();
+            string styleNumber = model.StyleNumber;
             using (Db db = new Db())
             {
                 #region Validation
@@ -157,7 +157,7 @@ namespace MVC_Store.Areas.Admin.Controllers
                 dto.Slug = slug.ToLower();
                 dto.Description = model.Description;
                 dto.ManufacturerId = model.ManufacturerId;
-                dto.StyleNumber = styleNumber;
+                dto.StyleNumber = styleNumber.ToLower();
                 dto.Price = model.Price;
                 if (checkFile != null)
                 {
